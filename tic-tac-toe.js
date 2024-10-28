@@ -12,24 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let Oturn = true;
     let countX = 0;
     let countO= 0;
-    let isXTurn = Math.random() < 0.5;
+    let isXTurn = Math.floor(Math.random() * 2);
     let Xturn = true;
     let gameState = Array(9).fill(null);
 
     const winningCombos = [[0,1,2], [3,4,5],[6,7,8], [0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
-    function checkWinner(){
-        for (let combo of winningCombos){
-            const [a,b,c] = combo;
-            if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]){
-                const winner = gameState[a];
-                document.getElementById("status").textContent = `Congratulations!${winner} is the Winner!`;
-                document.getElementById("status").classList.add("you-won");
-                return true;
-            }
-        }
-            return false;
-        }
+    
     
     
    
@@ -48,7 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     //onmouseover = (event) => {};
 
-    
+    function checkWinner(){
+        for (let combo of winningCombos){
+            const [a,b,c] = combo;
+            if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]){
+                const winner = gameState[a];
+                document.getElementById("status").textContent = "Congratulations! " +winner+ " is the Winner!";
+                document.getElementById("status").classList.add("you-won");
+                return true;
+            }
+        }
+            return false;
+        }
     //const sq = document.getElementById('board');
     //sq.setAttribute("class", "square");
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!sq.textContent && !checkWinner()){
             //num = Math.floor(Math.random() * 2);
-            if (isXTurn ){
+            if (isXTurn==1 ){
                 //Xturn = Xturn;
                 //if(Xturn){
                     sq.textContent = "X";
